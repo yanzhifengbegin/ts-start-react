@@ -1,14 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+// import App from "./App";
+import Hello from "./components/hello";
+import { createStore } from "redux";
+import { enthusiasm } from "./reducers/index";
+import { StoreState } from "./types/index";
+import { Provider } from "react-redux";
+
+import * as serviceWorker from "./serviceWorker";
+
+const store = createStore<StoreState>(enthusiasm, {
+  enthusiasmLevel: 1,
+  languageName: "TypeScript"
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <Hello />
+    </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root") as HTMLElement
 );
 
 // If you want your app to work offline and load faster, you can change
